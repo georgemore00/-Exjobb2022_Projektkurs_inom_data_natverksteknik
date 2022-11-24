@@ -16,7 +16,7 @@ const (
 	windowWidth  = 800
 	windowHeight = 600
 
-	ballStartX    = windowHeight / 2
+	ballStartX    = windowWidth / 2
 	ballStartY    = windowHeight / 2
 	player1StartX = padding
 	player2StartX = windowWidth - 20
@@ -45,8 +45,8 @@ func (game *Game) PointGiven(g *Game) {
 			println("enemyPlayer won round")
 		}
 		if g.ball.Position.X >= windowWidth {
-			g.myPlayer.Score += 1
 			g.ball.Reset(ballStartX, ballStartY)
+			g.myPlayer.Score += 1
 			g.myPlayer.ResetPosition()
 			println("myPlayer won round")
 		}
@@ -119,6 +119,7 @@ func (g *Game) Update() error {
 
 	//check if anyone won and give a point
 	g.PointGiven(g)
+
 	return nil
 }
 
@@ -127,11 +128,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//Draw scores
 	if g.client.ClientNr == 1 {
-		ebitenutil.DebugPrintAt(screen, "score "+strconv.FormatInt(int64(g.myPlayer.Score), 10), 200, 15)
-		ebitenutil.DebugPrintAt(screen, "score "+strconv.FormatInt(int64(g.enemyPlayer.Score), 10), 600, 15)
+		ebitenutil.DebugPrintAt(screen, "Score "+strconv.FormatInt(int64(g.myPlayer.Score), 10), 200, 15)
+		ebitenutil.DebugPrintAt(screen, "Score "+strconv.FormatInt(int64(g.enemyPlayer.Score), 10), 600, 15)
 	} else {
-		ebitenutil.DebugPrintAt(screen, "score "+strconv.FormatInt(int64(g.enemyPlayer.Score), 10), 200, 15)
-		ebitenutil.DebugPrintAt(screen, "score "+strconv.FormatInt(int64(g.myPlayer.Score), 10), 600, 15)
+		ebitenutil.DebugPrintAt(screen, "Score "+strconv.FormatInt(int64(g.enemyPlayer.Score), 10), 200, 15)
+		ebitenutil.DebugPrintAt(screen, "Score "+strconv.FormatInt(int64(g.myPlayer.Score), 10), 600, 15)
 	}
 
 	// Draw ball

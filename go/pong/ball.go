@@ -19,7 +19,7 @@ func NewBall(x, y float32) *Ball {
 		},
 		XVelocity: 0.0,
 		YVelocity: 0.0,
-		Rect:      *NewRect(10, 10),
+		Rect: *NewRect(10, 10),
 	}
 }
 
@@ -42,12 +42,12 @@ func (b *Ball) Update(windowHeight int, player1 *Player, player2 *Player) {
 		b.Position.Y = float32(b.Rect.Height)
 	}
 
-	// bounce off player rects
+	//bounce off player rects
 	//något weird med denna, man måste sikta lite i mitten av väggarna
 	if b.Position.X-10 < player1.Position.X+float32(player1.Rect.Width/2) &&
 		b.Position.Y > player1.Position.Y-float32(player1.Rect.Height/2) {
 		b.XVelocity = -b.XVelocity
-		b.Position.X = player1.Position.X + float32(player1.Rect.Width/2) + 10
+		b.Position.X = player1.Position.X + float32(player1.Rect.Width/2) + 10 //Vad gör denna rad???? Tror den ändrar riktning eller ngt
 
 	} else if b.Position.X+10 > player2.Position.X+float32(player2.Rect.Width/2) &&
 		b.Position.Y > player2.Position.Y-float32(player2.Rect.Height/2) {
